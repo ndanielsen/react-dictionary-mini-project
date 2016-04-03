@@ -1,4 +1,5 @@
 var React = require('react-native');
+var english_german = require('./english_german.json')
 
 var styles = React.StyleSheet.create({
     parent: {
@@ -25,6 +26,17 @@ var Dictionary = React.createClass({
             };
     },
 
+    showMeaning: function(){
+        var meaning = this.state.input in english_german ?
+            english_german[this.state.input] :
+            "Not Found";
+
+        // Update the state
+        this.setState({
+            output: meaning
+        });
+
+    },
 
 
     render: function(){
@@ -37,6 +49,8 @@ var Dictionary = React.createClass({
 
             <React.TextInput text = {this.state.input}
                 onChangeText={(e) => this.setState({input: e})}
+                text = { this.state.input }
+                onSubmitEditing = { this.showMeaning }
             />
 
             <React.Text style = {styles.germanLabel} >
